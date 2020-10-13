@@ -74,7 +74,7 @@ Understand what the Python pass statement is for, and when to use it
 Functions
 Describe how to define a function in Python
 Create a named function with def
-Create an anonymous function with lamda
+Create an anonymous function with lambda
 Demonstrate how to invoke a function
 Write functions which could do some/all of these:
 Accepts parameters

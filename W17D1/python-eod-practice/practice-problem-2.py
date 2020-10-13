@@ -18,7 +18,8 @@ print(topping_prices)
 # Example: topping_info('pepperoni') should output:
 #  {'topping': 'pepperoni', 'price': 1.25, 'formatted_price': '$1.25'}
 def topping_info(topping):
-  return {'topping': topping, 'price': topping_prices[topping], 'formatted_prices': (f'${topping_prices[topping]}')}
+  #return {'topping': topping, 'price': topping_prices[topping], 'formatted_prices': (f'${topping_prices[topping]}')}
+  return {'topping': topping, 'price': topping_prices[topping], 'formatted_prices': formatted_price(topping_prices[topping]) }
 print(topping_info('pepperoni'))
 # Part 3
 # Use the topping_info function to generate a list of topping info
@@ -26,5 +27,6 @@ print(topping_info('pepperoni'))
 # list= []
 # for topping in toppings:
 #   list.append(topping_info(topping))
-list_topping = list(map(topping_info, toppings))
+#list_topping = list(map(topping_info, toppings))
+list_topping = [topping_info(topping) for topping in toppings]
 print(list_topping)

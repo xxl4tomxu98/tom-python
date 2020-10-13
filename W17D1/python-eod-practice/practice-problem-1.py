@@ -13,6 +13,7 @@
 
 def lower_map(lst):
   return list(map(lambda x: x.lower(), lst))
+  #return [str.lower() for str in lst]
 
 # TEST DATA
 test = ["PLOP", "", "DROP", "ZOP", "STOP"]

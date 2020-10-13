@@ -13,6 +13,8 @@
 # WRITE YOUR CODE HERE
 def indexify(iterable):
   return [(index, value) for index, value in enumerate(iterable)]
+  # return [ pair for pair in enumerate(iteratble) ]
+  # return list(enumerate(iterable))
 
 # TEST DATA
 print(indexify(["a", "b", "c"]))  # > [(0, "a"), (1, "b"), (2, "c")]
