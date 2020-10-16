@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+
+<body>
+
+    <h1>Packages!</h1>
+    <form method="post" action="{{ url_for('session.logout') }}">
+      <div>{{ logoutform.submit }} - Logout</div>
+    </form>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Sender</th>
+                <th>Recipient</th>
+                <th>Origin</th>
+                <th>Destination</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- loop here to create rows -->
+            {% for package in packages %}
+            <tr>
+                <td>{{package.id}}</td>
+                <td>{{package.sender}}</td>
+                <td>{{package.recipient}}</td>
+                <td>{{package.origin}}</td>
+                <td>{{package.destination}}</td>
+                <td>{{package.location}}</td>
+            </tr>
+            {% endfor %}
+            <!-- loop here to create rows -->
+        </tbody>
+    </table>
+
+
+
+
+
+</body>
+
+</html>

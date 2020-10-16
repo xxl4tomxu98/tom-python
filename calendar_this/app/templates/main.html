@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <h1>Calendar Working</h1>
+        {% for field, errors in form.errors.items() %}
+        <div class="alert alert-error">
+            {{ form[field].label }}: {{ ', '.join(errors) }}
+        </div>
+        {% endfor %}
+
+        <form method="post" action="/">
+            {{form.csrf_token}}
+            <p><label>Name</label>{{form.name(placeholder="enter name")}}</p>
+            <p><label>Start Date</label>{{form.start_date(placeholder="enter date")}}</p>
+            <p><label>Start Time</label>{{form.start_time(placeholder="enter time")}}</p>
+            <p><label>End Date</label>{{form.end_date(placeholder="enter date")}}</p>
+            <p><label>End Time</label>{{form.end_time(placeholder="enter time")}}</p>
+            <p><label>Description</label>{{form.description(placeholder="enter description")}}</p>
+            <p><label>Private?</label>{{form.private()}}</p>
+            <p>{{form.submit()}}</p>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Start</th>
+                    <th>End</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[-2].strftime("%H:%M")}}</td>
+                    <td>{{row[-1].strftime("%H:%M")}}</td>
+                </tr>
+                {% endfor %}
+                <!-- loop here to create rows -->
+                <!-- use strftime to format date objects -->
+                <!-- loop here to create rows -->
+            </tbody>
+        </table>
+    </body>
+
+</html>

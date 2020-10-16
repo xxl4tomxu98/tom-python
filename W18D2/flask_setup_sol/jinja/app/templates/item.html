@@ -1,0 +1,19 @@
+<!-- Jinja looks just like HTML -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Item {{ item.id }} - Sample App</title>
+    <!-- We access variables by wrapping them in double quotes -->
+</head>
+
+<body>
+    {% include 'nav.html' %}
+    <!-- We can render other jinja files by using include with the name of the file in single quotes -->
+    <!-- wrapped with {% %} -->
+    <h1>Sample App</h1>
+    <h2>{{ item.name }}</h2>
+    <p>{{ item.description }}</p>
+</body>
+
+</html>

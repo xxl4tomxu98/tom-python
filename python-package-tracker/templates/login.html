@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Login</title>
+</head>
+<body>
+  <!-- The value ".login" means to go to the route handled by the login function in the current Blueprint. -->
+  <form method="post" action="{{ url_for('.login') }}">
+    {{ form.csrf_token }}
+    <div>
+      {{ form.name.label }} {{ form.name }}
+
+      {% if form.name.errors %}
+        <ul>
+          {% for error in form.name.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <div>
+      {{ form.password.label }} {{ form.password }}
+
+      {% if form.password.errors %}
+        <ul>
+          {% for error in form.password.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <div>{{ form.submit }}</div>
+  </form>
+</body>
+</html>

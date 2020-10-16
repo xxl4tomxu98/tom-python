@@ -1,26 +1,29 @@
 import psycopg2
+from pprint import pprint
+
 
 CONNECTION_PARAMETERS = {
                           'dbname': 'psycopg_test_db',
                           'user': 'psycopg_test_user',
                           'password': 'password',
+                          'host': 'localhost',
 }
 
 with psycopg2.connect(**CONNECTION_PARAMETERS) as conn:
-    print(conn.get_dsn_parameters())
+    pprint(conn.get_dsn_parameters())
 
 with psycopg2.connect(**CONNECTION_PARAMETERS) as conn:
     with conn.cursor() as curs:
         curs.execute("SELECT USER;")
         result = curs.fetchone()
-        print(result) # 'psycopg_test_user'
+        pprint(result) # 'psycopg_test_user'
 
 with psycopg2.connect(**CONNECTION_PARAMETERS) as conn:
     with conn.cursor() as curs:
         curs.execute('SELECT manu_year, make, model FROM cars;')
         cars = curs.fetchall()
         for car in cars:
-            print(car) # (1993, 'Mazda', 'Rx7')
+            pprint(car) # (1993, 'Mazda', 'Rx7')
 
 def print_all_cars():
     with psycopg2.connect(**CONNECTION_PARAMETERS) as conn:
@@ -28,7 +31,16 @@ def print_all_cars():
             curs.execute('SELECT manu_year, make, model, owner_id FROM cars;')
             cars = curs.fetchall()
             for car in cars:
-                print(car)
+                pprint(car)
+            # alternate while print for each
+            # car = curs.fetchone()
+            # while car:
+            #     pprint(car)
+            #     car = curs.fetchone()
+
+            # or this new way
+            # while car:= curs.fetchone()
+            #   pprint(car)
 
 
 print_all_cars()
