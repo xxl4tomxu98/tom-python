@@ -4,7 +4,9 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <link rel="stylesheet" href="/static/styles/calendar.css">
+        <script src="/static/scripts/calendar.js"></script>
+        <title>Calendar_This</title>
     </head>
 
     <body>
@@ -15,7 +17,8 @@
         </div>
         {% endfor %}
 
-        <form method="post" action="/">
+        <!-- action="" This will cause the form to submit to the same path the form resides on. -->
+        <form method="post" action="">
             {{form.csrf_token}}
             <p><label>Name</label>{{form.name(placeholder="enter name")}}</p>
             <p><label>Start Date</label>{{form.start_date(placeholder="enter date")}}</p>
@@ -26,7 +29,7 @@
             <p><label>Private?</label>{{form.private()}}</p>
             <p>{{form.submit()}}</p>
         </form>
-        <table>
+        <!-- <table>
             <thead>
                 <tr>
                     <th>Name</th>
@@ -42,11 +45,24 @@
                     <td>{{row[-1].strftime("%H:%M")}}</td>
                 </tr>
                 {% endfor %}
-                <!-- loop here to create rows -->
-                <!-- use strftime to format date objects -->
-                <!-- loop here to create rows -->
+
             </tbody>
-        </table>
+        </table> -->
+        <main>
+          <div class="selector">
+            <input type="date" id="date-selector" value="{{day.strftime('%Y-%m-%d')}}">
+          </div>
+          {% for slot in timeslots %}
+            <div>{{ slot.time.strftime("%H:%M") }}</div>
+            {% if slot.appointment %}
+              <div class="appointment" style="grid-row-end: span {{ slot.appointment.units }}" >
+                {{ slot.appointment.name }}
+              </div>
+            {% elif slot.open %}
+              <div></div>
+            {% endif %}
+          {% endfor %}
+        </main>
     </body>
 
 </html>

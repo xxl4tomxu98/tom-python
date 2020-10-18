@@ -14,10 +14,15 @@ def simple_get():
 def simple_post():
     form = SimpleForm()
     if form.validate_on_submit():
-        data = form.data
-        new_person = SimplePerson(name=data['name'],
-                                  age=data['age'],
-                                  bio=data['bio'])
+        # data = form.data
+        # new_person = SimplePerson(name=data['name'],
+        #                           age=data['age'],
+        #                           bio=data['bio'])
+        new_person = SimplePerson(name=form.name.data,
+                                   age=form.age.data,
+                                   bio=form.bio.data)
+        # new_person = SimplePerson()
+        # form.populate_obj(new_person)
         db.session.add(new_person)
         db.session.commit()
         return redirect('/')
@@ -30,6 +35,7 @@ def simple_post():
 
 @bp.route('/simple-form-data')
 def simple_form_data():
-    people = SimplePerson.query.filter(SimplePerson.name.startswith("M")).all()
+    # people = SimplePerson.query.filter(SimplePerson.name.startswith("M")).all()
+    people = db.session.query(SimplePerson).filter(SimplePerson.name.like("M%")).all()
     print(people)
     return render_template("simple_form_data.html", people=people)
