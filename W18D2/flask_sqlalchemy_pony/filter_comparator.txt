@@ -1,0 +1,12 @@
+Comparison	Description	Example
+==	Equal to	.filter(Pony.name == "Lucky Loser")
+!=	Not equal to	.filter(Pony.name != "Lucky Loser")
+>, >=	Greater than (or equal to)	.filter(Pony.birth_year < 2019
+<, <=	Less than (or equal to)	.filter(Pony.birth_year > 2010
+.like	Like	.filter(Pony.name.like("Lucky%"))
+.ilike	Case-insensitive like	.filter(Pony.name.like("lucky%"))
+.in_	Value in a list	.filter(Pony.age.in_([2018, 2019, 2020]))
+.notin_	Value not in a list	.filter(Pony.age.notin_([2018, 2019, 2020]))
+.is_	Comparison for IS NULL	.filter(Pony.name.is_(None))
+.isnot_	Comparison for IS NOT NULL	.filter(Pony.name.isnot_(None))
+.or_	OR together filters	.filter(or_(Pony.name == "Bob", Pony.name == "Blob"))

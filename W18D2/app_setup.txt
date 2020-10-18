@@ -1,0 +1,105 @@
+//app.__init__.py
+from flask import Flask
+from flask_migrate import Migrate
+from .config import Configuration
+from .routes import simple
+from .models import db
+
+app = Flask(__name__)
+app.config.from_object(Configuration)
+app.register_blueprint(simple.bp)
+db.init_app(app)
+Migrate(app, db)
+
+
+//app.config.py
+import os
+class Configuration:
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+
+//app.forms.py
+from flask_wtf import FlaskForm
+from wtforms import IntegerField, StringField, SubmitField, TextAreaField
+from wtforms.validators import DataRequired
+class SimpleForm(FlaskForm):
+    name = StringField("Name", validators=[DataRequired()])
+    age = IntegerField("Age")
+    bio = TextAreaField("Biography")
+    submit = SubmitField("Submit")
+
+
+//app.models.py
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
+class SimplePerson(db.Model):
+    __tablename__ = "simple_people"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    age = db.Column(db.Integer)
+    bio = db.Column(db.String(2000))
+
+//app.templates.get_list.html
+{% for person in result %}
+<div>{{ person.name }}</div>
+<div>{{ person.age }}</div>
+<div>{{ person.bio }}</div>
+{% endfor %}
+
+//app.templates.form.html
+<form method="post" action="/simple-form">
+    {{ form.csrf_token }}
+    <div>{{ form.name.label }} {{ form.name }}</div>
+    <div>{{ form.age.label }} {{ form.age }}</div>
+    <div>{{ form.bio.label }} {{ form.bio }}</div>
+    <div>{{ form.submit }}</div>
+</form>
+
+
+//app.routes.__init__.py
+empty
+
+//app.routes.simple.py
+from flask import Blueprint, redirect, render_template
+from ..forms import SimpleForm
+from ..models import db, SimplePerson
+
+bp = Blueprint("simple", __name__, "")
+
+@bp.route("/")
+def main_page():
+    return render_template("main_page.html")
+
+@bp.route("/simple-form")
+def simple_form():
+    form = SimpleForm()
+    return render_template("simple_form.html", form=form)
+
+@bp.route("/simple-form", methods=["POST"])
+def simple_form_submit():
+    form = SimpleForm()
+    if form.validate_on_submit():
+        # data = form.data
+        # person = SimplePerson(name=data['name'], age=data['age'], bio=data['bio'])
+        person = SimplePerson()
+        form.populate_obj(person)
+        db.session.add(person)
+        db.session.commit()
+        return redirect("/")
+    return "Bad Data"
+
+@bp.route("/simple-form-data")
+def simple_form_data():
+    # result = db.session.query(SimplePerson).filter(SimplePerson.name.startswith("M"))
+    result = SimplePerson.query.filter(SimplePerson.name.like("M%"))
+    return render_template("simple_form_data.html", result=result)
+
+//.env
+SECRET_KEY=ijustneedasecretkey
+DATABASE_URL=postgresql://pyweb_practice_user:pyweb@localhost/pyweb_practice_db
+FLASK_ENV=development
+
+//.flaskenv
+FLASK_APP=app

@@ -18,11 +18,21 @@ def simple_post():
         # new_person = SimplePerson(name=data['name'],
         #                           age=data['age'],
         #                           bio=data['bio'])
-        new_person = SimplePerson(name=form.name.data,
-                                   age=form.age.data,
-                                   bio=form.bio.data)
+
+        # new_person = SimplePerson(name=form.name.data,
+        #                            age=form.age.data,
+        #                            bio=form.bio.data)
+
         # new_person = SimplePerson()
         # form.populate_obj(new_person)
+
+
+        data = form.data
+        data.pop('submit')
+        if 'csrf_token' in data:
+            data.pop('csrf_token')
+        new_person = SimplePerson(**data)
+
         db.session.add(new_person)
         db.session.commit()
         return redirect('/')

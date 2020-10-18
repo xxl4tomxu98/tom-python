@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Pony! - I Want A Pony</title>
+</head>
+<body>
+  <header>
+    <a href="{{ url_for('index') }}">Home</a>
+    <a href="{{ url_for('ponies')}}">Back to pony list</a>
+  </header>
+  <fieldset>
+    <legend>Add new pony</legend>
+    <form method="post" action="/ponies/new">
+      <div>
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" required>
+      </div>
+      <div>
+        <label for="birth_year">Birth year</label>
+        <input type="number" name="birth_year" id="birth_year" required>
+      </div>
+      <div>
+        <label for="breed">Breed</label>
+        <input type="text" name="breed" id="breed" required>
+      </div>
+      <div>
+        <label for="owner_id">Owner id</label>
+        <select name="owner_id" id="owner_id">
+          {% for owner in owners %}
+            <option value="{{ owner.id }}">
+              {{ owner.last_name }}, {{ owner.first_name }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div>
+        <button type="submit">Create your new pony</button>
+      </div>
+    </form>
+  </fieldset>
+</body>
+</html>
