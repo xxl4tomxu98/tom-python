@@ -1,4 +1,4 @@
-from flask_login import UserMixin, current_user          # New import
+from flask_login import UserMixin, current_user
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -47,8 +47,8 @@ class MenuItem(db.Model):
   menu_type_id = db.Column(db.Integer, db.ForeignKey("menu_item_types.id"), nullable=False)
 
   menu = db.relationship("Menu", back_populates="items")
-  type = db.relationship("MenuItemType", back_populates="menu_item_type")
-  details = db.relationship("OrderDetail", back_populates="items")
+  type = db.relationship("MenuItemType")
+
 
 
 
@@ -56,8 +56,6 @@ class MenuItemType(db.Model):
   __tablename__ = "menu_item_types"
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(20), nullable=False)
-
-  menu_item_type = db.relationship("MenuItem", back_populates="type")
 
 
 
@@ -81,6 +79,9 @@ class Order(db.Model):
     table = db.relationship("Table", back_populates="orders")
     details = db.relationship("OrderDetail", back_populates="order")
 
+    @property
+    def total(self):
+        return sum([detail.menu_item.price for detail in self.details])
 
 class OrderDetail(db.Model):
     __tablename__ = "order_details"
@@ -90,4 +91,4 @@ class OrderDetail(db.Model):
     menu_item_id = db.Column(db.Integer, db.ForeignKey("menu_items.id"), nullable=False)
 
     order = db.relationship("Order", back_populates="details")
-    items = db.relationship("MenuItem", back_populates="details")
+    menu_item = db.relationship("MenuItem")

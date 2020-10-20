@@ -13,9 +13,12 @@ with app.app_context():
     db.drop_all()
     db.create_all()
 
-    employee = Employee(name="Margot", employee_number=1234, password="password")
+    employee1 = Employee(name="Margot", employee_number=1234, password="password")
+    employee2 = Employee(name="Mylo", employee_number=3244, password="password")
 
-    db.session.add(employee)
+    db.session.add(employee1)
+    db.session.add(employee2)
+
     beverages = MenuItemType(name="Beverages")
     entrees = MenuItemType(name="Entrees")
     sides = MenuItemType(name="Sides")
@@ -38,7 +41,9 @@ with app.app_context():
     table8 = Table(number=8, capacity=8)
     table9 = Table(number=9, capacity=9)
     table10 = Table(number=10, capacity=10)
-    db.session.add(table1, table2)
+    db.session.add(table1)
+    db.session.add(table2)
+    db.session.add(table3)
 
     order1 = Order(employee_id=1, table_id=1, finished=False)
     db.session.add(order1)

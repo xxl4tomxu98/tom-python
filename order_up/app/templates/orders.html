@@ -1,34 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Order Up!</h1>
-<form method="post" action="{{ url_for('session.logout') }}">
-    <div>{{ logoutform.submit }} - Logout</div>
-  </form>
-<form method="post" action="{{ url_for('orders.assign') }}">
-    <div>
-        {{ form.employee_number.label }} {{ form.employee_number }}
-
-        {% if form.employee_number.errors %}
+<div id="workspace">
+  <header class="actions-header">
+    <form class="assignment-form" method="post" action="{{ url_for('.assign') }}">
+      {{ taf.csrf_token }}
+      <div class="assignment-form-title">Assign Table</div>
+      <div>
+        <div class="assignment-form-select">{{ taf.employees }}</div>
+        {% if taf.employees.errors %}
           <ul>
-            {% for error in form.employee_number.errors %}
+            {% for error in taf.employees.errors %}
               <li>{{ error }}</li>
             {% endfor %}
           </ul>
         {% endif %}
       </div>
-    <div>
-        {{ form.table_number.label }} {{ form.table_number }}
-
-        {% if form.table_number.errors %}
+      <div>
+        <div class="assignment-form-select">{{ taf.tables }}</div>
+        {% if taf.tables.errors %}
           <ul>
-            {% for error in form.table_number.errors %}
+            {% for error in taf.tables.errors %}
               <li>{{ error }}</li>
             {% endfor %}
           </ul>
         {% endif %}
       </div>
-    <div>{{ form.submit }} Assign</div>
-  </form>
-
+      <div class="assignment-form-submit">{{ taf.submit(class="button assign") }}</div>
+    </form>
+    <form class="logout-form" method="post" action="{{ url_for('session.logout') }}">
+      <button class="logout">{{ logoutform.submit }}</button>
+    </form>
+  </header>
+</div>
 {% endblock %}

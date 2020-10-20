@@ -56,7 +56,7 @@ def close(id):
 @bp.route("/")
 @login_required
 def index():
-    taf = TableAssignmentForm()
+    taf = AssignTable()
     open_tables, servers = open_tables_and_servers()
     taf.tables.choices = [(t.id, f"Table {t.number}") for t in open_tables]
     taf.employees.choices = [(e.id, e.name) for e in servers]
