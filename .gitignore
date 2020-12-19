@@ -2,7 +2,7 @@
 ## Regarding ZIP files, we should not leave them in the repository. Instead, we
 ## should mark the commit that contains the commit from which the project should
 ## be generated.
-*.zip
+#*.zip
 
 ## -----------------------------------------------------------------------------
 ## Ignore local course builder output directories
