@@ -4,6 +4,7 @@ https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-tr
 """
 from tree_node import TreeNode
 
+#given the preorder and inorder traversal lists of integers
 def buildTree(preorder, inorder):
   """
   :type preorder: List[int]
@@ -12,12 +13,17 @@ def buildTree(preorder, inorder):
   """
   if len(preorder)==0 and len(inorder)==0:
     return None
+  # the root value is first in preorder list
   root = TreeNode(preorder[0])
+  # find the index of this root value in Inorder list
   root_ind = inorder.index(preorder[0])
+  # determine the left and right subtrees from inorder list
   left_inorder = inorder[:root_ind]
   right_inorder = inorder[root_ind + 1:]
+  # identify the subtree values in preorder lists
   left_preorder = [i for i in preorder if i in left_inorder]
   right_preorder = [i for i in preorder if i in right_inorder]
+  # above preps allow a nice recursive solution
   root.left = buildTree(left_preorder, left_inorder)
   root.right = buildTree(right_preorder, right_inorder)
   return root
