@@ -11,6 +11,7 @@ class TreeNode(object):
 
 def treeHeight(root):
     if(not root):
+        # for tree with 0 node, height=-1
         return -1
     return 1 + max(treeHeight(root.left), treeHeight(root.right))
 
@@ -22,6 +23,7 @@ def isBalanced(root):
     :rtype: bool
     """
     if(not root):
+        # 0 node is treated as balanced
         return True
     if(abs(treeHeight(root.right)-treeHeight(root.left))>1):
         return False

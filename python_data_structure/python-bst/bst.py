@@ -3,6 +3,7 @@ from tree_node import TreeNode
 class BinarySearchTree:
     def __init__(self, value):
         self._root = None
+        # do you know this value is the "tree value"?
         self._value = value
         self._left = None
         self._right = None
