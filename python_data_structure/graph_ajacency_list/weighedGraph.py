@@ -49,7 +49,7 @@ def dijkstras(graph, source):
 
 # this helper function will find the unvisited node with the smallest distance
 def minDistanceNode(nodes, distance):
-    return ((lambda x, y: x + y),[node if distance[node] < distance[minNode] else minNode for node in nodes])
+    return reduce(lambda node, minNode: node if distance[node] < distance[minNode] else minNode, nodes)
          
 
 (distance, previous) = dijkstras(graph, 'a')
