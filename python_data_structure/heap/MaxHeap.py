@@ -36,8 +36,7 @@ class MaxHeap:
         return max
     
     def siftDown(self, idx):
-        ary = self.array
-        print(ary)
+        ary = self.array        
         leftIdx = self.getLeftChild(idx)
         rightIdx = self.getRightChild(idx)
 
