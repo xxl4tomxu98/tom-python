@@ -32,8 +32,7 @@ def _depthFirstIter(node, graph, visited):
             continue
         print(node)        
         visited.add(node)
-        for neighbor in graph[node]:
-            stack.append(neighbor)
+        stack += graph[node]
 
 
 def _depthFirstRecur(node, graph, visited):    
@@ -41,7 +40,7 @@ def _depthFirstRecur(node, graph, visited):
     node = stack.pop()
     if node in visited:
         return
-    #print(node)        
+    print(node)        
     visited.add(node)
     for neighbor in graph[node]:
         _depthFirstRecur(neighbor, graph, visited)

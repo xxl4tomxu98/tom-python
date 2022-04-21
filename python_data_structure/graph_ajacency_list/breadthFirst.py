@@ -22,8 +22,7 @@ def _breadthFirstIter(node, graph, visited):
             continue
         print(node)
         visited.add(node)
-        for neighbor in graph[node]:
-            queue.append(neighbor)
+        queue += graph[node]
 
 
 breadthFirst(graph)
