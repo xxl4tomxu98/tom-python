@@ -26,7 +26,7 @@ def depthFirst(graph):
 
 def _depthFirstIter(node, graph, visited):    
     stack = [node]
-    while len(stack)!=0:
+    while stack:
         node = stack.pop()
         if node in visited:
             continue
