@@ -12,7 +12,7 @@ graph2 = {
             'z': [],
         }
 
-
+# This is two function DFS solution
 def num_regions(graph):
     visited = set()
     count = 0
@@ -30,13 +30,13 @@ def _depthFirstRecur(node, graph, visited):
         _depthFirstRecur(neighbor, graph, visited)
     return True
 
-print(num_regions(graph2))
 
 
+
+# BFS one function solution
 def numRegions(graph):
     visited = set()
     counter = 0
-
     for node in graph:
         queue = [node]
         if node not in visited:
@@ -52,3 +52,5 @@ def numRegions(graph):
 
 print(numRegions(graph1))
 print(numRegions(graph2))
+print(num_regions(graph1))
+print(num_regions(graph2))
