@@ -1,12 +1,11 @@
 '''Largest Contiguous Sub-sum
-You have an array of integers and you want to find the largest contiguous (together in sequence)
-sub-sum. Find the sums of all contiguous sub-arrays and return the max.
+You have an array of integers and you want to find the largest contiguous 
+(together in sequence)sub-sum. Find the sums of all contiguous sub-arrays
+and return the max.
 
 Example:
-
     list = [5, 3, -7]
     largest_contiguous_subsum(list) # => 8
-
     # possible sub-sums
     [5]           # => 5
     [5, 3]        # => 8 --> we want this one
@@ -14,12 +13,12 @@ Example:
     [3]           # => 3
     [3, -7]       # => -4
     [-7]          # => -7
-Example 2:
 
+Example 2:
     list = [2, 3, -6, 7, -6, 7]
     largest_contiguous_subsum(list) # => 8 (from [7, -6, 7])
-Example 3:
 
+Example 3:
     list = [-5, -1, -3]
     largest_contiguous_subsum(list) # => -1 (from [-1])'''
 
@@ -39,18 +38,19 @@ print(largest_contiguous_subsum([5, 3, -7]))
 print(largest_contiguous_subsum([2, 3, -6, 7, -6, 7]))
 print(largest_contiguous_subsum([-5, -1, -3]))
 
-# this solution is O(n) in time and O(1) in space
+# two pointers traversal is O(n) in time and O(1) in space
 def largest_contiguous_subsum1(list):
     if len(list)==0:
         return None
     if all(x < 0 for x in list):
         # all negatives largest would be single element
         return max(list)
-    #use one pointer largest for traversal, current for cum
+    #use pointer largest keeping track of largest current anytime, current
+    #is the cumulative sum at any traversal location
     largest = list[0]
     current = largest
     for i in range(1,len(list)):
-        # this is to eliminate negative because they don't contribute to larger num
+        # this is to negative current to 0 because they don't contribute to larger sum
         if current < 0:
             current = 0        
         current += list[i]

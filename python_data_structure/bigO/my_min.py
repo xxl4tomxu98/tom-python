@@ -13,6 +13,7 @@ Example
 #this is O(n) time and O(1) space
 def my_min(list):
     min = list[0]
+    # traversal the list using min to track lower values
     for i in list[1:]:
         if min > i:
             min=i
