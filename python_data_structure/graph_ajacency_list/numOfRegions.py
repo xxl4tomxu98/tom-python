@@ -39,15 +39,13 @@ Time complexity: O(N + R) where N is the number of people and R is the number of
 
 
 
-# Python3 program to count number of
-# existing groups and number of new
-# groups that can be formed.
+# Python3 program to count number of existing groups and number of new groups
+# that can be formed. Note the class representation of graph adjacency list
 class Graph:
     def __init__(self, V):
         self.V = V
         self.adj = [[] for i in range(V)]
-    # Adds a relation as a two way
-    # edge of undirected graph.
+    # Adds a relation as a two way edge of undirected graph.
     def addRelation(self, v, w):
         # Since indexing is 0 based,
         # reducing edge numbers by 1.
@@ -56,8 +54,7 @@ class Graph:
         self.adj[v].append(w)
         self.adj[w].append(v)
 
-    # Returns count of not visited
-    # nodes reachable from v using DFS.
+    # Returns count of not visited nodes reachable from v using DFS.
     def countUtil(self, v, visited):
         count = 1
         visited[v] = True
