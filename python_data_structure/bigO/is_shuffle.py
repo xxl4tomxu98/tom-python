@@ -51,33 +51,37 @@ print(is_shuffle('XXZ', 'XXY', 'XXYXXZ'))
 def is_shuffle1(str1, str2, str3):
     if len(str3) == 0:
         return (len(str1)==0) & (len(str2)==0)
-
     if str1[0] == str3[0]:
-        if is_shuffle(str1[1:], str2, str3[1:]):
-            return True
-    
+        return is_shuffle(str1[1:], str2, str3[1:])                
     if str2[0] == str3[0]:
-        if is_shuffle(str1, str2[1:], str3[1:]):
-            return True
+        return is_shuffle(str1, str2[1:], str3[1:])
     return False
+
 
 print(is_shuffle1('XXZ', 'XXY', 'XXYXXZ'))
 
 
 # BST solution dynamic
 def is_shuffle2(str1, str2, str3):
+    # start with 1st elements of str1 and str2
     candidates = [[0,0]]
     while (len(candidates) != 0):
         temp = candidates.pop(0)
-        str1_used_len = candidates[0]
-        str2_used_len = candidates[1]
+        str1_used_len = temp[0]
+        str2_used_len = temp[1]
         str3_used_len = str1_used_len + str2_used_len
+        # traversal reached end of str3 return True
         if str3_used_len == len(str3):
-            return True        
+            return True 
+        print(str1_used_len, str2_used_len, str3_used_len)   
+        if str1_used_len==len(str1):
+            continue
         if str1[str1_used_len] == str3[str3_used_len]:
-            candidates.push([str1_used_len + 1, str2_used_len])        
+            candidates.append([str1_used_len + 1, str2_used_len])        
+        if str2_used_len==len(str2):
+            continue
         if str2[str2_used_len] == str3[str3_used_len]:
-            candidates.push([str1_used_len, str2_used_len + 1])
+            candidates.append([str1_used_len, str2_used_len + 1])
 
 print(is_shuffle2('XXZ', 'XXY', 'XXYXXZ'))       
 
@@ -86,21 +90,25 @@ def is_shuffle3(str1, str2, str3):
     candidates = [[0,0]]
     while (len(candidates) != 0):
         temp = candidates.pop(0)
-        str1_used_len = candidates[0]
-        str2_used_len = candidates[1]
+        str1_used_len = temp[0]
+        str2_used_len = temp[1]
         str3_used_len = str1_used_len + str2_used_len
-        if (str3_used_len == str3.length):
-            return True        
-        if (str1[str1_used_len] == str3[str3_used_len]):
+        if str3_used_len == len(str3):
+            return True  
+        if str1_used_len==len(str1):
+            continue      
+        if str1[str1_used_len] == str3[str3_used_len]:
             new_candidate = [str1_used_len + 1, str2_used_len]
-            if (not seen_candidates[new_candidate]):
-                candidates.push(new_candidate)
-                seen_candidates[new_candidate] = True        
-        if (str2[str2_used_len] == str3[str3_used_len]):
+            if str(new_candidate) not in seen_candidates:
+                candidates.append(new_candidate)
+                seen_candidates[str(new_candidate)] = True 
+        if str2_used_len==len(str2):
+            continue       
+        if str2[str2_used_len] == str3[str3_used_len]:
             new_candidate = [str1_used_len, str2_used_len + 1]
-            if (not seen_candidates[new_candidate]):
-                candidates.push(new_candidate)
-                seen_candidates[new_candidate] = True  
+            if str(new_candidate) not in seen_candidates:
+                candidates.append(new_candidate)
+                seen_candidates[str(new_candidate)] = True  
     return False
  
 print(is_shuffle3('XXZ', 'XXY', 'XXYXXZ'))
