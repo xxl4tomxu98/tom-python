@@ -13,7 +13,7 @@ def buildTree(preorder, inorder):
   """
   if len(preorder)==0 and len(inorder)==0:
     return None
-  # the root value is first in preorder list
+  # the root value is first in preorder list or DFS traversal list
   root = TreeNode(preorder[0])
   # find the index of this root value in Inorder list
   root_ind = inorder.index(preorder[0])

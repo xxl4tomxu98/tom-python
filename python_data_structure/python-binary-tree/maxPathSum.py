@@ -16,7 +16,8 @@ If we know them, it will be very helpful because:
 "parent only", this is also a new path
 there are 4 types of path formed in this parent!
 Compare them and select the max one to update global answer
-Compare them and select the max from 2,3,4 to return to this parent's parent. (why 2,3,4? look at the bold parts above)"""
+Compare them and select the max from 2,3,4 to return to this parent's parent.
+(why 2,3,4? look at the bold parts above)"""
 
 class Solution1:
     def maxPathSum(self, root: Optional[TreeNode]) -> int:

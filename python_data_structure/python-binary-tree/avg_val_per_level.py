@@ -15,7 +15,7 @@ output: [4, 8, 6, 6, 2]
 
 from tree_node import TreeNode
 # solution with O(n) time and space since we traverse all nodes and lists in dict
-# also occupy O(n) space
+# values also occupy O(n) space
 def dfs_traverse(node, hash, level=0):
     if not node:
         return None    
