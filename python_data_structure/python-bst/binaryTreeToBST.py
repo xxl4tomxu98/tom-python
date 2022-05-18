@@ -1,6 +1,5 @@
-# convert a binary tree to BST keeping the same tree structure
-
-# Program to convert binary tree to BST
+# convert a binary tree to BST keeping the same tree structure which means
+# we have to get the nodes and sort the values before putting back to BST
 
 # A binary tree node
 class Node:	
