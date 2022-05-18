@@ -4,8 +4,7 @@ should work. You just need to ensure that a binary tree can be serialized to
 a string and this string can be deserialized to the original tree structure"""
 from tree_node import TreeNode
 def serialize(self, root):
-        """Encodes a tree to a single string.
-        
+        """Encodes a tree to a single string.        
         :type root: TreeNode
         :rtype: str
         """
@@ -25,8 +24,7 @@ def serialize(self, root):
         return ''.join(my_str)
     
 def deserialize(self, data):
-    """Decodes your encoded data to tree.
-    
+    """Decodes your encoded data to tree.    
     :type data: str
     :rtype: TreeNode
     """
@@ -41,7 +39,6 @@ def deserialize(self, data):
             return
         node = TreeNode(int(val))
         node.left = helper()
-        node.right = helper()
-        
+        node.right = helper()        
         return node
     return helper()
