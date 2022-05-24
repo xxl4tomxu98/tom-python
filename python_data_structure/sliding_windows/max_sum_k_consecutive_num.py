@@ -32,17 +32,18 @@ def max_sum1(arr, k):
 
 # sliding window with 2 variables tracking each sums and swap
 def max_sum2(arr, k):
+    # arbitraily set inital max_sum to be sum of 1st k elements
     max_sum = sum(arr[:k])
     curr_sum = max_sum
     for i in range(len(arr)-k):
+        # shifting window 1 step
         curr_sum = curr_sum - arr[i] + arr[i+k]
         if max_sum < curr_sum:
             max_sum = curr_sum
     return max_sum
 
 
-arr = [1, 4, 2, 10, 2,
-       3, 1, 0, 20]
+arr = [1, 4, 2, 10, 2, 3, 1, 0, 20]
 k = 4
 
 print(max_sum(arr,k))
