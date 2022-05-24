@@ -15,6 +15,7 @@ def findItinerary(tickets: List[List[str]]) -> List[str]:
     stack = ['JFK']
     result = []
     while stack:
+        # peek stack top check if it is terminal node
         if not graph[stack[-1]]:
             result.append(stack.pop())
         else:
@@ -22,4 +23,5 @@ def findItinerary(tickets: List[List[str]]) -> List[str]:
     result.reverse()
     return result
 
-print(findItinerary([['PHL','STL'], ['JFK','OHR'], ['LOG','STL'], ['OHR','PHL'], ['LOG', 'JFK']]))
+print(findItinerary([['PHL','STL'], ['JFK','OHR'], ['LOG','STL'], ['OHR','PHL'],
+                     ['LOG','JFK'], ['IAH','SEA'], ['IAH','JFK']]))

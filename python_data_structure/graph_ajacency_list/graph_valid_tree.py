@@ -8,7 +8,7 @@ Input: n = 5, and edges = [[0,1], [1,2], [2,3], [1,3], [1,4]]
 Output: false
 Before solving the problem, we have to know the definitions of Tree vs Graph:
 A tree is a special undirected graph. It satisfies two properties
-1) It is connected. 2) It has no cycle.
+1) It is connected. No separate regions. 2) It has no cycle.
 Being connected means you can start from any node and reach any other node. To prove it,
 we can do a DFS and add each node we visit to a set. After we visited all the nodes,
 we compare the number of nodes in the set with the total number of nodes. If they are 
