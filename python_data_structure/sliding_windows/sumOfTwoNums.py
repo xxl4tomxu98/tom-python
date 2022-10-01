@@ -15,7 +15,7 @@ def sumOfTwoNums(arr: List[int], target: int) -> (int, int):
 print(sumOfTwoNums([12, 34, 35, 201, -2, -102, 0, 4], -98))
 
 
-# O(n)time and O(n) space solution Hash Table 
+# O(n)time and O(n) space solution Hash Table where numbers are keys and indexes are values
 def twoSum(nums: List[int], target: int) -> List[int]:
     hash_map = {}
     for i in range(len(nums)):

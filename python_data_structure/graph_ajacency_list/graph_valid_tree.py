@@ -25,7 +25,7 @@ from typing import List
 
 def validTree1(n: int, edges: List[List[int]]) -> bool:    
     graph = defaultdict(list)    
-    # build the graph
+    # build the graph of undirectional edge connected nodes
     for src, dest in edges:
         graph[src].append(dest)
         graph[dest].append(src)        

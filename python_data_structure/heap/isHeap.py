@@ -2,10 +2,13 @@ import math
 from MaxHeap import MaxHeap
 # you may assume that the array will always have a null element at the 0-th index
 def isMaxHeap(array, idx=1):
+    # starting idx=1 and as recursion progresses idx increases
+    # and if idx greater than the elements in array traversal to leaf
     if idx > len(array)-1:
         return True
     leftIndex = idx * 2
     rightIndex = idx * 2 + 1
+    # leaf nodes ensurs satisfying the MaxHeap condition 
     if leftIndex > len(array)-1:
         leftVal = -math.inf
     else:
